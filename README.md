@@ -18,7 +18,7 @@
 * 06/10 8H30-10H
 * Création de la vm avec dolibarr
 * on a commencer a faire les 2 docker
-* mise en place des 2 docker files
-* Configuration dolibarr
+* à faire mise en place des 2 docker files
+* à faire Configuration dolibarr
 
 
