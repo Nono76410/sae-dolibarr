@@ -1,0 +1,25 @@
+services:
+  db:
+    build: ./mariadb
+    environment:
+      DB_NAME: dolibarr
+      DB_USER: dolibarr
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  web:
+    build: ./dolibarr
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - dolibarr_docs:/var/www/documents
+      - dolibarr_conf:/var/www/html/dolibarr/htdocs/conf
+
+volumes:
+  db_data:
+  dolibarr_docs:
+  dolibarr_conf:
