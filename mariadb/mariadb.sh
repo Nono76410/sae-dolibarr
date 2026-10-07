@@ -13,6 +13,8 @@ done
 
 mariadb <<-SQL
 	CREATE DATABASE IF NOT EXISTS \`${DB_NAME:-dolibarr}\`;
+	CREATE USER IF NOT EXISTS '${DB_USER:-dolibarr}'@'localhost' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
+	ALTER USER '${DB_USER:-dolibarr}'@'localhost' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
 	CREATE USER IF NOT EXISTS '${DB_USER:-dolibarr}'@'%' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
 	ALTER USER '${DB_USER:-dolibarr}'@'%' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
 	GRANT ALL PRIVILEGES ON \`${DB_NAME:-dolibarr}\`.* TO '${DB_USER:-dolibarr}'@'%';

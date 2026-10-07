@@ -1,9 +1,10 @@
 # Journal de bord
-(remplacer les items en majuscule)
-* TITRE PROJET
+* SAE-Dolibarr
 * Pay Nolan
 * Ouerdane Gwen
 * 05/10
+* Username : dolibarr / admin
+* password : azerty1234
 
 
 ## Séance n° 1
