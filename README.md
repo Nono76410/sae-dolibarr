@@ -21,4 +21,9 @@
 * à faire mise en place des 2 docker files
 * à faire Configuration dolibarr
 
-
+## Séance n° 2.5 
+* 07/10 19H30-23H20
+* Compréhension de l'architecture
+* Mise en place du docker avec ces scripts. 
+* ajout de la persistence de la base dans le dossier data. 
+* Prochaine étape : Faire en sortes que les mdps ne soit pas en clair et réaliser les test. 

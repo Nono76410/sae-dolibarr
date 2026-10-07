@@ -2,6 +2,12 @@ FROM debian:12
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+COPY conf.php /opt/dolibarr.conf.php
+COPY enable-modules.php /opt/enable-modules.php
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apache2 libapache2-mod-php \
     php php-cli php-common php-mysql php-gd php-curl php-intl \
@@ -21,4 +27,4 @@ COPY dolibarr.conf /etc/apache2/sites-available/dolibarr.conf
 RUN a2dissite 000-default.conf && a2ensite dolibarr.conf && a2enmod rewrite
 
 EXPOSE 80
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["/entrypoint.sh"]

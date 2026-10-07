@@ -1,15 +1,23 @@
 #!/bin/bash
+set -e
 
-sudo apt update && sudo apt upgrade -y
+if [ ! -d /var/lib/mysql/mysql ]; then
+	mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+fi
 
-sudo apt install mariadb-server mariadb-client -y
+mysqld_safe --datadir=/var/lib/mysql --bind-address=0.0.0.0 &
 
-sudo systemctl start mariadb
-sudo systemctl enable mariadb
+until mariadb-admin ping --silent; do
+	sleep 1
+done
 
-sudo mysql -e "CREATE DATABASE IF NOT EXISTS dolibarr;"
-sudo mysql -e "CREATE USER IF NOT EXISTS 'dolibarr'@'localhost' IDENTIFIED BY 'azerty1234';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON dolibarr.* TO 'dolibarr'@'localhost';"
-sudo mysql -e "FLUSH PRIVILEGES;"
+mariadb <<-SQL
+	CREATE DATABASE IF NOT EXISTS \`${DB_NAME:-dolibarr}\`;
+	CREATE USER IF NOT EXISTS '${DB_USER:-dolibarr}'@'%' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
+	ALTER USER '${DB_USER:-dolibarr}'@'%' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
+	GRANT ALL PRIVILEGES ON \`${DB_NAME:-dolibarr}\`.* TO '${DB_USER:-dolibarr}'@'%';
+	ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD:-azerty1234}';
+	FLUSH PRIVILEGES;
+SQL
 
-echo "MariaDB est installé et la base 'dolibarr' est prête !"
+wait
