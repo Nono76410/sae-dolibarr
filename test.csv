@@ -1,0 +1,8 @@
+Nom;Client;Code client;Pays;Email;Téléphone;Type de tiers
+"Société Générale Réseaux";1;CU-2026-001;France;contact@sg-reseaux.fr;0140506070;Client
+"Mairie de Gouy";1;CU-2026-002;France;mairie@gouy76.fr;0235354050;Client
+"PME Informatique Normandie";1;CU-2026-003;France;support@pme-normandie.local;0232456789;Client
+"Cisco Systems France";2;FR-CISCO-001;France;partners@cisco.fr;0158046000;Fournisseur
+"Rad Data Communications";2;FR-RAD-002;France;orders@rad.com;0141922600;Fournisseur
+"Opérateur Telecom Pro";1;CU-2026-004;France;grandes-comptes@operatpro.fr;0800123456;Client
+"Campus Numérique Rouen";1;CU-2026-005;France;admin@campus-rouen.rt;0232833000;Client

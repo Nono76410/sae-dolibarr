@@ -1,3 +1,9 @@
+# Installation 
+* ./install.sh
+
+# importation des données : 
+* ./import.sh [fichier].csv
+
 # Journal de bord
 * SAE-Dolibarr
 * Pay Nolan
@@ -28,3 +34,10 @@
 * Mise en place du docker avec ces scripts. 
 * ajout de la persistence de la base dans le dossier data. 
 * Prochaine étape : Faire en sortes que les mdps ne soit pas en clair et réaliser les test. 
+
+## Séance n° 3
+* 08/10 13H00-16H00
+* modification et finalisation de la configuration
+* centralisation des mdp dans docker-compose
+* Création du script install.sh et import.sh
+* à faire test de fin et finalisation + optimisation pour la db
