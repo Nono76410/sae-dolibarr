@@ -3,6 +3,9 @@ set -e
 
 if [ ! -d /var/lib/mysql/mysql ]; then
 	mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+	root_mariadb_command="mariadb -u root"
+else
+	root_mariadb_command="mariadb -u root -p${DB_ROOT_PASSWORD:-azerty1234}"
 fi
 
 mysqld_safe --datadir=/var/lib/mysql --bind-address=0.0.0.0 &
@@ -11,7 +14,7 @@ until mariadb-admin ping --silent; do
 	sleep 1
 done
 
-mariadb <<-SQL
+eval "$root_mariadb_command" <<-SQL
 	CREATE DATABASE IF NOT EXISTS \`${DB_NAME:-dolibarr}\`;
 	CREATE USER IF NOT EXISTS '${DB_USER:-dolibarr}'@'localhost' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
 	ALTER USER '${DB_USER:-dolibarr}'@'localhost' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';

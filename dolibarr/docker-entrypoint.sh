@@ -15,5 +15,6 @@ if ! php -r '$db = new mysqli("db", "dolibarr", "azerty1234", "dolibarr", 3306);
 fi
 
 php /opt/enable-modules.php
+php /opt/seed-demo.php
 
 exec apache2ctl -D FOREGROUND
