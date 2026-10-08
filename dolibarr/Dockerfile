@@ -20,6 +20,8 @@ RUN wget -q https://github.com/Dolibarr/dolibarr/archive/refs/tags/20.0.0.tar.gz
     && mv /tmp/dolibarr-20.0.0 /var/www/html/dolibarr \
     && rm /tmp/doli.tar.gz
 
+COPY install.forced.php /var/www/html/dolibarr/htdocs/install/install.forced.php
+
 RUN mkdir -p /var/www/documents \
     && chown -R www-data:www-data /var/www/html/dolibarr /var/www/documents
 
