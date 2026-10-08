@@ -14,7 +14,6 @@ if ! php -r '$db = new mysqli("db", "dolibarr", "azerty1234", "dolibarr", 3306);
     php step5.php "" "" fr_FR set "$admin_login" "$admin_password" "$admin_password" 444
 fi
 
-php /opt/enable-modules.php
-php /opt/seed-demo.php
+php /opt/configure-demo.php
 
 exec apache2ctl -D FOREGROUND

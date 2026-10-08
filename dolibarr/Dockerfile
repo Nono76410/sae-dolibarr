@@ -6,8 +6,7 @@ COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 COPY conf.php /opt/dolibarr.conf.php
-COPY enable-modules.php /opt/enable-modules.php
-COPY seed-demo.php /opt/seed-demo.php
+COPY configure-demo.php /opt/configure-demo.php
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apache2 libapache2-mod-php \
