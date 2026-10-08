@@ -1,23 +1,36 @@
+x-dolibarr-credentials: &dolibarr-credentials
+  DOLI_DB_HOST: db
+  DOLI_DB_PORT: 3306
+  DOLI_DB_NAME: dolibarr
+  DOLI_DB_USER: dolibarr
+  DOLI_DB_PASSWORD: azerty1234
+  DOLI_DB_ROOT_PASSWORD: azerty1234
+  DOLI_ADMIN_LOGIN: dolibarr
+  DOLI_ADMIN_PASSWORD: azerty1234
+
 services:
   db:
     build: ./mariadb
     environment:
-      DB_NAME: dolibarr
-      DB_USER: dolibarr
-      DB_PASSWORD: azerty1234
-      DB_ROOT_PASSWORD: azerty1234
+      <<: *dolibarr-credentials
     volumes:
       - ./mariadb/data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
 
   web:
     build: ./dolibarr
     environment:
-      DOLI_ADMIN_LOGIN: admin
-      DOLI_ADMIN_PASSWORD: azerty1234
+      <<: *dolibarr-credentials
     ports:
       - "8080:80"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - dolibarr_docs:/var/www/documents
       - dolibarr_conf:/var/www/html/dolibarr/htdocs/conf

@@ -5,7 +5,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
 	mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 	root_mariadb_command="mariadb -u root"
 else
-	root_mariadb_command="mariadb -u root -p${DB_ROOT_PASSWORD:-azerty1234}"
+	root_mariadb_command="mariadb -u root -p${DOLI_DB_ROOT_PASSWORD}"
 fi
 
 mysqld_safe --datadir=/var/lib/mysql --bind-address=0.0.0.0 &
@@ -15,13 +15,14 @@ until mariadb-admin ping --silent; do
 done
 
 eval "$root_mariadb_command" <<-SQL
-	CREATE DATABASE IF NOT EXISTS \`${DB_NAME:-dolibarr}\`;
-	CREATE USER IF NOT EXISTS '${DB_USER:-dolibarr}'@'localhost' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
-	ALTER USER '${DB_USER:-dolibarr}'@'localhost' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
-	CREATE USER IF NOT EXISTS '${DB_USER:-dolibarr}'@'%' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
-	ALTER USER '${DB_USER:-dolibarr}'@'%' IDENTIFIED BY '${DB_PASSWORD:-azerty1234}';
-	GRANT ALL PRIVILEGES ON \`${DB_NAME:-dolibarr}\`.* TO '${DB_USER:-dolibarr}'@'%';
-	ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD:-azerty1234}';
+	CREATE DATABASE IF NOT EXISTS \`${DOLI_DB_NAME}\`;
+	CREATE USER IF NOT EXISTS '${DOLI_DB_USER}'@'localhost' IDENTIFIED BY '${DOLI_DB_PASSWORD}';
+	ALTER USER '${DOLI_DB_USER}'@'localhost' IDENTIFIED BY '${DOLI_DB_PASSWORD}';
+	CREATE USER IF NOT EXISTS '${DOLI_DB_USER}'@'%' IDENTIFIED BY '${DOLI_DB_PASSWORD}';
+	ALTER USER '${DOLI_DB_USER}'@'%' IDENTIFIED BY '${DOLI_DB_PASSWORD}';
+	GRANT ALL PRIVILEGES ON \`${DOLI_DB_NAME}\`.* TO '${DOLI_DB_USER}'@'%';
+	GRANT ALL PRIVILEGES ON \`${DOLI_DB_NAME}\`.* TO '${DOLI_DB_USER}'@'localhost';
+	ALTER USER 'root'@'localhost' IDENTIFIED BY '${DOLI_DB_ROOT_PASSWORD}';
 	FLUSH PRIVILEGES;
 SQL
 
