@@ -1,4 +1,6 @@
 #!/bin/sh
+# Objectif : Initialiser le conteneur Dolibarr et injecter la configuration sans passer par l'assistant web.
+# Sources : Dépôt GitHub Dolibarr, IA, conf par défaut de dolibarr.
 set -e
 
 install -o www-data -g www-data -m 0640 \

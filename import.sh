@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Objectif : Importer les clients/fournisseurs du fichier CSV directement dans la table SQL llx_societe.
+# Sources : Wiki Dolibarr (modèle de données), IA.
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

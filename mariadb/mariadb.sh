@@ -1,4 +1,6 @@
 #!/bin/bash
+# Objectif : Créer la base de données et configurer les droits de l'utilisateur Dolibarr au démarrage.
+# Sources : Documentation de l'image Docker MariaDB, IA, d'autre documentation externe. 
 set -e
 
 if [ ! -d /var/lib/mysql/mysql ]; then

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Objectif : Déployer et lancer les conteneurs Docker pour Dolibarr et MariaDB.
+# Sources : Documentation officielle Dolibarr, IA.
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -42,4 +44,4 @@ if ! "${COMPOSE[@]}" ps --status running | grep -q 'web'; then
 fi
 
 echo "Dolibarr est disponible sur http://localhost:8080"
-echo "Import CSV : ./import.sh test.csv"
+echo "Import CSV : ./import.sh ./data/test.csv"
