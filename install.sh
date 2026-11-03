@@ -64,4 +64,3 @@ if [ -n "$RESTORE_FILE" ]; then
 fi
 
 echo "Dolibarr est disponible sur http://localhost:8080"
-echo "Import CSV : ./import.sh ./data/test.csv"

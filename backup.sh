@@ -34,7 +34,8 @@ trap 'rm -rf "$WORK_DIR"' EXIT
 mkdir -p "$BACKUP_DIR" "$WORK_DIR/documents" "$WORK_DIR/conf"
 
 "${COMPOSE[@]}" exec -T db sh -c \
-    'mariadb-dump --single-transaction --routines --events --triggers "$DOLI_DB_NAME"' \
+    'mariadb-dump --user="$DOLI_DB_USER" --password="$DOLI_DB_PASSWORD" \
+        --single-transaction --routines --events --triggers "$DOLI_DB_NAME"' \
     > "$WORK_DIR/database.sql"
 "${COMPOSE[@]}" cp web:/var/www/documents/. "$WORK_DIR/documents/"
 "${COMPOSE[@]}" cp web:/var/www/html/dolibarr/htdocs/conf/. "$WORK_DIR/conf/"
