@@ -35,9 +35,26 @@ Dans Dolibarr, les entreprises sont enregistrées dans la table `llx_societe`. N
 - `datec` : la date d'ajout
 
 ## 3. Sauvegarde et PRA (Plan de Reprise d'Activité)
-Toutes les données de la base MariaDB sont sauvegardées à l'extérieur du conteneur Docker, dans le dossier local `./jmariadb/data/`. 
+Une sauvegarde portable contient le dump SQL MariaDB, les documents déposés dans
+Dolibarr et sa configuration. Elle doit être stockée sur un support différent du
+serveur :
 
-Si le serveur plante ou si les conteneurs sont supprimés, il suffit de conserver ce dossier et de relancer `./install.sh`. Le système redémarrera avec toutes les données exactes du moment de la coupure.
+```bash
+./backup.sh
+# ou : ./backup.sh /chemin/vers/le/support
+```
+
+Pour repartir de zéro et restaurer cette sauvegarde avec la procédure
+d'installation :
+
+```bash
+./install.sh --restore ./backups/dolibarr-AAAAMMJJ-HHMMSS.tar.gz
+```
+
+La restauration recrée la base, réimporte toutes les données et remet en place
+les documents et la configuration des volumes Docker. Le dossier
+`mariadb/data/` reste une persistance locale utile en cas d'arrêt simple, mais
+la sauvegarde `backup.sh` est la procédure de référence du PRA.
 
 ## 4. Journal de bord
 Le détail de ce qui a été fait à chaque séance, ainsi que les problèmes rencontrés et résolus, se trouvent dans le fichier `suivi_projet.md`.

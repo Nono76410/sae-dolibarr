@@ -3,9 +3,11 @@
 # Sources : Dépôt GitHub Dolibarr, IA, conf par défaut de dolibarr.
 set -e
 
-install -o www-data -g www-data -m 0640 \
-    /opt/dolibarr.conf.php \
-    /var/www/html/dolibarr/htdocs/conf/conf.php
+if [ ! -f /var/www/html/dolibarr/htdocs/conf/conf.php ]; then
+    install -o www-data -g www-data -m 0640 \
+        /opt/dolibarr.conf.php \
+        /var/www/html/dolibarr/htdocs/conf/conf.php
+fi
 
 chmod 0440 /var/www/html/dolibarr/htdocs/conf/conf.php
 
