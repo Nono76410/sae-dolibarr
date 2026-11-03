@@ -34,8 +34,21 @@
 * Ajout des sources et objectifs en en-tête des scripts. 
 * Documentation du PRA (Plan de Reprise d'Activité). 
 
-## Séance 5 
-* 03/11 13H00-16H00
+## Séance 5
+* 03/11 16H00-17H30
+* Vérification du besoin de sauvegarde dans le cadre d'un PRA.
+* Ajout du script `backup.sh`, qui génère une archive portable contenant la
+  base MariaDB, les documents Dolibarr et sa configuration.
+* Ajout du script `restore.sh` et de l'option
+  `./install.sh --restore <sauvegarde.tar.gz>` pour repartir de zéro après un
+  incident.
+* Correction de l'initialisation du conteneur web afin de ne pas écraser une
+  configuration restaurée.
+* Complément du `README.md` avec les procédures de sauvegarde, de test et de
+  restauration.
+* Décision de ne pas restaurer automatiquement au démarrage : un dossier
+  `mariadb/data/` non vide contient normalement les données actives et une
+  restauration automatique pourrait les écraser.
 * Création des slides pour la soutenance orale. 
 * Préparation des explications sur nos choix techniques et problèmes résolus. 
 * Rangement final du GitHub (déplacement du CSV dans le dossier `data/`). 
