@@ -15,7 +15,7 @@ Pour lancer l'installation complète, exécutez le script suivant à la racine d
 
 Ce script va lancer les conteneurs via `docker-compose` et configurer Dolibarr pour qu'il soit prêt à l'emploi, en évitant de devoir remplir les étapes sur la page web.
 
-**Accès à Dolibarr (sur http://localhost) :**
+**Accès à Dolibarr (sur http://localhost:8080) :**
 - Identifiant : `dolibarr`
 - Mot de passe : `azerty1234`
 
